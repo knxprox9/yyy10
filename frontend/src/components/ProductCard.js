@@ -187,6 +187,7 @@ const StyledWrapper = styled.div`
     position: absolute;
     left: 20px;
     bottom: -20px;
+    .toggle-trigger { position: absolute; left: 20px; bottom: -20px; height: 55px; width: 55px; opacity: 0; z-index: 5; cursor: pointer; }
     z-index: 4;
     transform: scale(0.55);
     transform-origin: left bottom;
