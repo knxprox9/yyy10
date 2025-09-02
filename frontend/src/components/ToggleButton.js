@@ -5,7 +5,7 @@ const Button = ({ active = false, onClick = () => {} }) => {
   return (
     <StyledWrapper>
       <div className="container">
-        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة" onClick={onClick}>
+        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة">
           {/* Controlled checkbox reflects active state; click handled on container to ensure firing */}
           <input type="checkbox" checked={active} readOnly />
           <span className="button" />
