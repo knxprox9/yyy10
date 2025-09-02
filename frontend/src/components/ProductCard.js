@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { SiVisa, SiGooglepay, SiMastercard, SiRoblox } from 'react-icons/si';
+import { SiVisa, SiGooglepay, SiRoblox } from 'react-icons/si';
 import { FiTruck, FiShield, FiGift, FiX } from 'react-icons/fi';
 import ToggleButton from './ToggleButton';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 const ProductCard = () => {
   const [miniOpen, setMiniOpen] = useState(false);
@@ -11,71 +10,6 @@ const ProductCard = () => {
   useEffect(() => {
     try { console.log('ProductCard: miniOpen', miniOpen); } catch {}
   }, [miniOpen]);
-
-  const paymentOptions = [
-    { key: 'visa', title: 'فيزا', color: '#1434CB' },
-    { key: 'google', title: 'Google Pay', color: '#4285F4' },
-    { key: 'mastercard', title: 'ماستركارد', color: '#EB001B' },
-    { key: 'roblox', title: 'Roblox', color: '#E2231A' },
-  ];
-
-  const PaymentIcon = ({ type, size = 36 }) => {
-    switch (type) {
-      case 'visa':
-        return <SiVisa size={size} color="#1434CB" />;
-      case 'google':
-        return <SiGooglepay size={size} color="#4285F4" />;
-      case 'mastercard':
-        return <img src="/assets/mastercard.svg" alt="Mastercard" style={{ height: size - 4, width: 'auto' }} />;
-      case 'roblox':
-        return <SiRoblox size={size} color="#E2231A" />;
-      default:
-        return null;
-    }
-  };
-
-  const OptionSlide = ({ opt }) => (
-    <div className="card option-card" role="group" aria-label={`بطاقة ${opt.title}`}>
-      <div className="image-container">
-        <span className={`status-dot online`} aria-label={'online'} />
-        <svg viewBox="0 0 1921 1081" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" className="svg">
-          <defs>
-            <radialGradient gradientUnits="objectBoundingBox" gradientTransform="translate(0.219) scale(0.563 1)" r="1.204" cy="0.5" cx="0.5" id="radial-gradient-mini">
-              <stop stopColor="#fff" offset={0} />
-              <stop stopColor="#bcbcbc" offset={1} />
-            </radialGradient>
-          </defs>
-          <g transform="translate(-121.5 -92.5)">
-            <rect fill="url(#radial-gradient-mini)" strokeWidth={1} strokeMiterlimit={10} stroke="#fff" transform="translate(122 93)" height={1080} width={1920} />
-          </g>
-        </svg>
-      </div>
-      <div className="content">
-        <div className="brand">بطاقة {opt.title}</div>
-        <div className="product-name">بطاقة رقمية جاهزة للاستخدام</div>
-        <div className="option-icon-row">
-          <div className="icon-wrap">
-            <PaymentIcon type={opt.key} size={38} />
-          </div>
-        </div>
-        <div className="divider" aria-hidden="true" />
-        <div className="promo-row" aria-label="promotions">
-          <div className="promo-item">
-            <FiTruck aria-hidden="true" />
-            <span>شحن سريع</span>
-          </div>
-          <div className="promo-item">
-            <FiShield aria-hidden="true" />
-            <span>آمن</span>
-          </div>
-          <div className="promo-item">
-            <FiGift aria-hidden="true" />
-            <span>هدايا</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <StyledWrapper>
@@ -87,17 +21,23 @@ const ProductCard = () => {
               <FiX size={16} />
             </button>
             <div className="mini-content">
-              <Carousel className="w-full" opts={{ align: 'start', loop: true }}>
-                <CarouselContent>
-                  {paymentOptions.map((opt) => (
-                    <CarouselItem key={opt.key}>
-                      <OptionSlide opt={opt} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious style={{ left: 8, right: 'auto' }} />
-                <CarouselNext style={{ right: 8, left: 'auto' }} />
-              </Carousel>
+              {/* نفس أزرار/أيقونات الدفع الموجودة في الكرت الأصلي بنفس التصميم والحجم */}
+              <div className="mini-payments">
+                <ul className="colors-container">
+                  <li className="payment-card visa" aria-label="Visa">
+                    <div className="card-icon real-icon visa"><SiVisa size={20} color="#1434CB"/></div>
+                  </li>
+                  <li className="payment-card google" aria-label="Google Pay">
+                    <div className="card-icon real-icon google"><SiGooglepay size={20} color="#4285F4"/></div>
+                  </li>
+                  <li className="payment-card mastercard" aria-label="Mastercard">
+                    <div className="card-icon real-icon mastercard"><img src="/assets/mastercard.svg" alt="Mastercard" style={{height: '16px', width: 'auto'}}/></div>
+                  </li>
+                  <li className="payment-card roblox" aria-label="Roblox">
+                    <div className="card-icon real-icon roblox"><SiRoblox size={20} color="#E2231A"/></div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
@@ -158,8 +98,7 @@ const ProductCard = () => {
               <path fill="#fc0" transform="translate(20.607 -1.047)" d="M9.357,1.558,11.282,5.45a.919.919,0,0,0,.692.5l4.3.624a.916.916,0,0,1,.509,1.564l-3.115,3.029a.916.916,0,0,0-.264.812l.735,4.278a.919.919,0,0,1-1.334.967l-3.85-2.02a.922.922,0,0,0-.855,0l-3.85,2.02a.919.919,0,0,1-1.334-.967l.735-4.278a.916.916,0,0,0-.264-.812L.279,8.14A.916.916,0,0,1,.789,6.576l4.3-.624a.919.919,0,0,0,.692-.5L7.71,1.558A.92.92,0,0,1,9.357,1.558Z" data-name="star-svgrepo-com" id="star-svgrepo-com-2" />
               <path fill="#fc0" transform="translate(41.215 -1.047)" d="M9.357,1.558,11.282,5.45a.919.919,0,0,0,.692.5l4.3.624a.916.916,0,0,1,.509,1.564l-3.115,3.029a.916.916,0,0,0-.264.812l.735,4.278a.919.919,0,0,1-1.334.967l-3.85-2.02a.922.922,0,0,0-.855,0l-3.85,2.02a.919.919,0,0,1-1.334-.967l.735-4.278a.916.916,0,0,0-.264-.812L.279,8.14A.916.916,0,0,1,.789,6.576l4.3-.624a.919.919,0,0,0,.692-.5L7.71,1.558A.92.92,0,0,1,9.357,1.558Z" data-name="star-svgrepo-com" id="star-svgrepo-com-3" />
               <path fill="#fc0" transform="translate(61.823 -1.047)" d="M9.357,1.558,11.282,5.45a.919.919,0,0,0,.692.5l4.3.624a.916.916,0,0,1,.509,1.564l-3.115,3.029a.916.916,0,0,0-.264.812l.735,4.278a.919.919,0,0,1-1.334.967l-3.85-2.02a.922.922,0,0,0-.855,0l-3.85,2.02a.919.919,0,0,1-1.334-.967l.735-4.278a.916.916,0,0,0-.264-.812L.279,8.14A.916.916,0,0,1,.789,6.576l4.3-.624a.919.919,0,0,0,.692-.5L7.71,1.558A.92.92,0,0,1,9.357,1.558Z" data-name="star-svgrepo-com" id="star-svgrepo-com-4" />
-              <path fill="#e9e9e9" transform="translate(82.431 -1.047)" d="M9.357,1.558,11.282,5.45a.919.919,0,0,0,.692.5l4.3.624a.916.916,0,0,1,.509,1.564l-3.115,3.029a.916.916,0,0,0-.264.812l.735,4.278a.919.919,0,0,1-1.334.967l-3.85-2.02a.922.922,0,0,0-
-.855,0l-3.85,2.02a.919.919,0,0,1-1.334-.967l.735-4.278a.916.916,0,0,0-.264-.812L.279,8.14A.916.916,0,0,1,.789,6.576l4.3-.624a.919.919,0,0,0,.692-.5L7.71,1.558A.92.92,0,0,1,9.357,1.558Z" data-name="star-svgrepo-com" id="star-svgrepo-com-5" />
+              <path fill="#e9e9e9" transform="translate(82.431 -1.047)" d="M9.357,1.558,11.282,5.45a.919.919,0,0,0,.692.5l4.3.624a.916.916,0,0,1,.509,1.564l-3.115,3.029a.916.916,0,0,0-.264.812l.735,4.278a.919.919,0,0,1-1.334.967l-3.85-2.02a.922.922,0,0,0-.855,0l-3.85,2.02a.919.919,0,0,1-1.334-.967l.735-4.278a.916.916,0,0,0-.264-.812L.279,8.14A.916.916,0,0,1,.789,6.576l4.3-.624a.919.919,0,0,0,.692-.5L7.71,1.558A.92.92,0,0,1,9.357,1.558Z" data-name="star-svgrepo-com" id="star-svgrepo-com-5" />
             </svg>
             (29,062)
           </div>
@@ -234,7 +173,7 @@ const StyledWrapper = styled.div`
   }
 
   .mini-content {
-    padding: 0.5rem;
+    padding: 1rem;
     padding-top: 2.2rem; /* leave room for close btn */
     text-align: center;
     color: #374151;
@@ -242,9 +181,26 @@ const StyledWrapper = styled.div`
     display: flex; align-items: center; justify-content: center;
   }
 
-  .option-card { box-shadow: none; padding-bottom: 1rem; }
-  .option-icon-row { display:flex; align-items:center; justify-content:center; margin: 0.5rem 0; }
-  .option-icon-row .icon-wrap { background:#fff; border:1px solid #eef2ff; border-radius: 8px; padding: 6px 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  /* نفس تصميم الأزرار الصغيرة */
+  .mini-overlay .colors-container {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem;
+    font-size: 0.5rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 200px;
+  }
+  .mini-overlay .payment-card { height: 18px; position: relative; cursor: pointer; transition: transform 0.2s ease; }
+  .mini-overlay .payment-card:hover { transform: scale(1.1); }
+  .mini-overlay .payment-card .card-icon { height: 100%; width: auto; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+  .mini-overlay .payment-card .real-icon { display: flex; align-items: center; justify-content: center; background: white; padding: 2px 6px; border-radius: 4px; overflow: hidden; }
+  .mini-overlay .payment-card .real-icon svg,
+  .mini-overlay .payment-card .real-icon img { transform: scale(1.35); transform-origin: center; }
+  .mini-overlay .payment-card.roblox .real-icon svg { width: 28px; height: 16px; }
 
   .card .image-container {
     position: relative;
