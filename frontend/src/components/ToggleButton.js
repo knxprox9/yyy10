@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = () => {
+const Button = ({ active = false, onClick }) => {
   return (
     <StyledWrapper>
       <div className="container">
-        <div className="toggle">
-          <input type="checkbox" />
+        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة">
+          {/* Controlled checkbox reflects active state; readOnly to avoid React warning */}
+          <input type="checkbox" checked={active} onChange={() => onClick && onClick()} readOnly />
           <span className="button" />
           <span className="label" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -43,10 +44,7 @@ const StyledWrapper = styled.div`
     width: 72px;
     left: 50%;
     top: 50%;
-  }
-
-  .toogle input:checked~.label {
-    color: rgba(255,0,0,0.8);
+    content: '';
   }
 
   .toggle .button {
@@ -54,7 +52,7 @@ const StyledWrapper = styled.div`
     box-shadow: 0 15px 25px -4px rgba(0, 0, 0, 0.5), inset 0 -3px 4px -1px rgba(0, 0, 0, 0.2), 0 -10px 15px -1px rgba(255, 255, 255, 0.6), inset 0 3px 4px -1px rgba(255, 255, 255, 0.2), inset 0 0 5px 1px rgba(255, 255, 255, 0.8), inset 0 20px 30px 0 rgba(255, 255, 255, 0.2);
     border-radius: 68.8px;
     position: absolute;
-    background: #eaeaea;
+    background: #ffffff;
     margin-left: -34.4px;
     margin-top: -34.4px;
     display: block;

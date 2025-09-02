@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SiVisa, SiGooglepay, SiMastercard, SiRoblox } from 'react-icons/si';
-import { FiTruck, FiShield, FiGift } from 'react-icons/fi';
+import { FiTruck, FiShield, FiGift, FiX } from 'react-icons/fi';
 import ToggleButton from './ToggleButton';
 
 const ProductCard = () => {
+  const [miniOpen, setMiniOpen] = useState(false);
+
   return (
     <StyledWrapper>
       <div className="card">
+        {/* Floating mini page overlay (same size as the card) */}
+        {miniOpen && (
+          <div className="mini-overlay" role="dialog" aria-modal="true" aria-label="صفحة مصغرة">
+            <button className="close-btn" onClick={() => setMiniOpen(false)} aria-label="إغلاق">
+              <FiX size={16} />
+            </button>
+            <div className="mini-content">
+              <h3>صفحة مصغرة</h3>
+              <p>هنا يمكنك عرض محتوى إضافي أو إجراءات سريعة.</p>
+            </div>
+          </div>
+        )}
+
         <div className="image-container">
           {/* Online status indicator (green dot) */}
           <span className={`status-dot online`} aria-label={'online'} />
           <div className="toggle-wrapper">
-            <ToggleButton />
+            <ToggleButton active={miniOpen} onClick={() => setMiniOpen(true)} />
           </div>
           <svg viewBox="0 0 1921 1081" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" className="svg">
             <defs>
@@ -70,7 +85,6 @@ const ProductCard = () => {
           </div>
           <div className="divider" aria-hidden="true" />
 
-
           <div className="promo-row" aria-label="promotions">
             <div className="promo-item">
               <FiTruck aria-hidden="true" />
@@ -105,6 +119,44 @@ const StyledWrapper = styled.div`
     box-shadow: rgba(100, 100, 111, 0.2) 0px 50px 30px -20px;
     transition: all 0.5s ease-in-out;
     direction: rtl;
+    overflow: hidden; /* ensure overlay matches rounded corners */
+  }
+
+  /* Mini overlay that matches the card bounds */
+  .mini-overlay {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    border-radius: inherit;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .mini-overlay .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #111827;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  .mini-content {
+    padding: 1rem;
+    padding-top: 2.2rem; /* leave room for close btn */
+    text-align: center;
+    color: #374151;
   }
 
   .card .image-container {
@@ -205,6 +257,7 @@ const StyledWrapper = styled.div`
 
   @keyframes typing-dots { 0%, 80%, 100% { transform: scale(1); opacity: 0.5; } 40% { transform: scale(1.2); opacity: 1; } }
   @keyframes circle-bounce { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
 `;
 
 export default ProductCard;
