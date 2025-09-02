@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = ({ active = false, onClick }) => {
+const Button = ({ active = false, onClick = () => {} }) => {
   return (
     <StyledWrapper>
       <div className="container">
-        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة">
-          {/* Controlled checkbox reflects active state; readOnly to avoid React warning */}
-          <input type="checkbox" checked={active} onChange={() => onClick && onClick()} readOnly />
+        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة" onClick={onClick}>
+          {/* Controlled checkbox reflects active state; click handled on container to ensure firing */}
+          <input type="checkbox" checked={active} readOnly />
           <span className="button" />
           <span className="label" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -30,6 +30,7 @@ const StyledWrapper = styled.div`
     position: relative;
     height: 100px;
     width: 100px;
+    cursor: pointer;
   }
 
   .toggle:before {
@@ -76,6 +77,7 @@ const StyledWrapper = styled.div`
     height: 100%;
     width: 100%;
     color: rgba(0, 0, 0, 0.9);
+    pointer-events: none;
   }
 
   .toggle input {
