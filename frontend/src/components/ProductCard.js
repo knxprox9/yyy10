@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { SiVisa, SiGooglepay, SiMastercard, SiRoblox } from 'react-icons/si';
 import { FiTruck, FiShield, FiGift, FiX } from 'react-icons/fi';
@@ -6,6 +6,10 @@ import ToggleButton from './ToggleButton';
 
 const ProductCard = () => {
   const [miniOpen, setMiniOpen] = useState(false);
+
+  useEffect(() => {
+    try { console.log('ProductCard: miniOpen', miniOpen); } catch {}
+  }, [miniOpen]);
 
   return (
     <StyledWrapper>
@@ -27,7 +31,6 @@ const ProductCard = () => {
           {/* Online status indicator (green dot) */}
           <span className={`status-dot online`} aria-label={'online'} />
           <div className="toggle-wrapper" title="فتح الصفحة المصغرة">
-            <button className="toggle-trigger" aria-label="فتح الصفحة المصغرة" onClick={() => setMiniOpen(true)} />
             <ToggleButton active={miniOpen} onClick={() => setMiniOpen(true)} />
           </div>
           <svg viewBox="0 0 1921 1081" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" className="svg">
@@ -187,7 +190,6 @@ const StyledWrapper = styled.div`
     position: absolute;
     left: 20px;
     bottom: -20px;
-    .toggle-trigger { position: absolute; left: 20px; bottom: -20px; height: 55px; width: 55px; opacity: 0; z-index: 5; cursor: pointer; }
     z-index: 4;
     transform: scale(0.55);
     transform-origin: left bottom;

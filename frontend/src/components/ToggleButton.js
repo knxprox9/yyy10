@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Button = ({ active = false, onClick = () => {} }) => {
   const handleClick = (e) => {
     e.stopPropagation();
+    try { console.log('ToggleButton: click'); } catch {}
     onClick();
   };
 
