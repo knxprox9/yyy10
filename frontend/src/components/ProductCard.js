@@ -14,6 +14,9 @@ const ProductCard = () => {
   return (
     <StyledWrapper>
       <div className="card">
+        {/* Dim background behind card when mini overlay is open */}
+        {miniOpen && <div className="card-dim" onClick={() => setMiniOpen(false)} aria-hidden="true" />}
+
         {/* Floating mini page overlay (same size as the card) */}
         {miniOpen && (
           <div className="mini-overlay" role="dialog" aria-modal="true" aria-label="صفحة مصغرة">
