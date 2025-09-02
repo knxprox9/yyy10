@@ -173,13 +173,14 @@ const StyledWrapper = styled.div`
   }
 
   .mini-content {
-    padding: 1rem;
+    padding: 0.75rem 0.75rem 1rem 0.75rem;
     padding-top: 2.2rem; /* leave room for close btn */
-    text-align: center;
     color: #374151;
     height: 100%;
-    display: flex; align-items: center; justify-content: center;
   }
+  .mini-payments { display:flex; justify-content:center; }
+  .mini-overlay .colors-container { margin-top: 0; }
+
 
   /* نفس تصميم الأزرار الصغيرة */
   .mini-overlay .colors-container {
