@@ -140,6 +140,9 @@ const StyledWrapper = styled.div`
     padding-bottom: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 50px 30px -20px;
     transition: all 0.5s ease-in-out;
+  .card .card-dim { position:absolute; inset:0; background: rgba(17, 24, 39, 0.45); z-index: 10; }
+  .mini-overlay { z-index: 20; }
+
     direction: rtl;
     overflow: hidden; /* ensure overlay matches rounded corners */
   }
