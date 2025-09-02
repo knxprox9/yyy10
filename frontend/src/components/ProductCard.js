@@ -145,12 +145,12 @@ const StyledWrapper = styled.div`
   .mini-overlay {
     position: absolute;
     inset: 0;
-    background: #ffffff;
+    background: transparent; /* make overlay transparent */
     border-radius: inherit;
     z-index: 20;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    box-shadow: none; /* remove shadow so only buttons show */
     animation: fadeIn 200ms ease-out;
   }
 
