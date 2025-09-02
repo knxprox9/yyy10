@@ -30,6 +30,7 @@ const StyledWrapper = styled.div`
     position: relative;
     height: 100px;
     width: 100px;
+    pointer-events: none; /* ensure click passes to wrapper in parent */
     cursor: pointer;
   }
 
