@@ -5,10 +5,10 @@ const Button = ({ active = false, onClick = () => {} }) => {
   return (
     <StyledWrapper>
       <div className="container">
-        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة">
-          {/* Controlled checkbox reflects active state; click handled on container to ensure firing */}
-          <input type="checkbox" checked={active} readOnly />
-          <span className="button" />
+        <div className="toggle" role="button" aria-label="فتح الصفحة المصغرة" title="فتح الصفحة المصغرة" onClick={onClick}>
+          {/* Attach handlers to ensure clicks anywhere on the control open the mini page */}
+          <input type="checkbox" checked={active} readOnly onClick={onClick} />
+          <span className="button" onClick={onClick} />
           <span className="label" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="4"/>
@@ -30,7 +30,6 @@ const StyledWrapper = styled.div`
     position: relative;
     height: 100px;
     width: 100px;
-    pointer-events: none; /* ensure click passes to wrapper in parent */
     cursor: pointer;
   }
 
@@ -78,7 +77,7 @@ const StyledWrapper = styled.div`
     height: 100%;
     width: 100%;
     color: rgba(0, 0, 0, 0.9);
-    pointer-events: none;
+    pointer-events: none; /* ensure parent handles clicks */
   }
 
   .toggle input {

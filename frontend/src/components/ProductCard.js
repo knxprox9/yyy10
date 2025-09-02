@@ -26,8 +26,8 @@ const ProductCard = () => {
         <div className="image-container">
           {/* Online status indicator (green dot) */}
           <span className={`status-dot online`} aria-label={'online'} />
-          <div className="toggle-wrapper" onClick={() => setMiniOpen(true)} title="فتح الصفحة المصغرة">
-            <ToggleButton active={miniOpen} />
+          <div className="toggle-wrapper" title="فتح الصفحة المصغرة">
+            <ToggleButton active={miniOpen} onClick={() => setMiniOpen(true)} />
           </div>
           <svg viewBox="0 0 1921 1081" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" className="svg">
             <defs>
