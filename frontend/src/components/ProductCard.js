@@ -162,20 +162,22 @@ const StyledWrapper = styled.div`
 
   .mini-overlay .close-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
     background: #111827;
     color: #fff;
     border: none;
     border-radius: 999px;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    opacity: 0.9;
+    opacity: 0.95;
     z-index: 30;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
   }
 
   .mini-content {
